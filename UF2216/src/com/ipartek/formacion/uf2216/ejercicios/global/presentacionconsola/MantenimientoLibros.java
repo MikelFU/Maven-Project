@@ -17,10 +17,13 @@ public class MantenimientoLibros {
 		// TODO Menú con insertar, modificar, borrar, listar, buscar por id
 		// TODO Buscar por titulo
 		Crudable<Libro> dao = LibrosDAOColeccion.getInstance();
-		dao.insertar(new Libro(1, "Título 1"));
-		dao.insertar(new Libro(2, "Título 2"));
-		dao.insertar(new Libro(3, "Título 3"));
-		dao.insertar(new Libro(4, "Título 4"));
+		Libro libro1 = new Libro(1, "Título 1");
+		Libro libro2 = new Libro(2, "Título 2");
+		Libro libro3 = new Libro(3, "Título 3");
+		dao.insertar(libro1);
+		dao.insertar(libro2);
+		dao.insertar(libro3);
+		arrayLibros.add(libro1);
 
 		mostrarMenu();
 
@@ -65,9 +68,9 @@ public class MantenimientoLibros {
 	}
 
 	public static void anadir() {
-		long idLibro;
+		int idLibro;
 		String tituloNuevoLibro;
-		idLibro = Long.parseLong(JOptionPane.showInputDialog("Añade el id del libro : "));
+		idLibro = Integer.parseInt(JOptionPane.showInputDialog("Añade el id del libro : "));
 		tituloNuevoLibro = JOptionPane.showInputDialog("Añade el título del libro : ");
 
 		Crudable<Libro> dao = LibrosDAOColeccion.getInstance();
@@ -97,7 +100,6 @@ public class MantenimientoLibros {
 	public static void borrar(int numeroABorrar) {
 		Crudable<Libro> dao = LibrosDAOColeccion.getInstance();
 		dao.borrar(numeroABorrar);
-
 		volver();
 	}
 
@@ -113,22 +115,16 @@ public class MantenimientoLibros {
 		}
 	}
 
-	public static void buscarPorID() { 
-		String id;
-		Crudable<Libro> dao = LibrosDAOColeccion.getInstance();
-		
-		do {
-			id = JOptionPane.showInputDialog("Introduzca el ID a buscar");
-			int i;
-			for (i = 0; i < numeroDeLibros() ; i++) {
-				
-			}
-		} while (JOptionPane.showConfirmDialog(
-                null,
-                "Desea Continuar",
-                "Otro tema",
-                JOptionPane.YES_NO_OPTION)
-                == JOptionPane.YES_OPTION);
+	public static void buscarPorID() {
+		/*
+		 * String id; Crudable<Libro> dao = LibrosDAOColeccion.getInstance();
+		 * 
+		 * do { id = JOptionPane.showInputDialog("Introduzca el ID a buscar"); int i;
+		 * for (i = 0; i < numeroDeLibros() ; i++) {
+		 * 
+		 * } } while (JOptionPane.showConfirmDialog( null, "Desea Continuar",
+		 * "Otro tema", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION);
+		 */
 
 	}
 

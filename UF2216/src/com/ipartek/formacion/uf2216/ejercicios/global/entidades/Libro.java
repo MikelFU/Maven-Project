@@ -3,7 +3,7 @@ package com.ipartek.formacion.uf2216.ejercicios.global.entidades;
 public class Libro {
 	// TODO: ISBN, Editorial, Autor, Descripción, Género, Edición, IsBorrado, Fecha
 	// de impresión
-	private long id;
+	private int id;
 	private String titulo;
 //	private long isbn;
 //	private String editorial;
@@ -14,10 +14,14 @@ public class Libro {
 //	private boolean isBorrado;
 //	private Date fechaDeImpresion;
 
-	public Libro(long id, String titulo) {
+	public Libro(int id, String titulo) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
+	}
+
+	public Libro() {
+
 	}
 
 	@Override
@@ -25,11 +29,11 @@ public class Libro {
 		return "Libro [id=" + id + ", titulo=" + titulo + "]";
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

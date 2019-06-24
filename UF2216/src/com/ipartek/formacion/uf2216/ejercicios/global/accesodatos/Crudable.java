@@ -12,7 +12,7 @@ public interface Crudable<T> {
 	public void insertar(T objeto);
 	public void modificar(T objeto);
 	public void borrar(T objeto);
-	public void borrar(long id);
+	public void borrar(int id);
 	public int numeroDeLibros();
 	
 }
