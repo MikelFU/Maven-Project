@@ -32,7 +32,8 @@ public class MantenimientoLibros {
 		String respuesta;
 		int opcion;
 		do {
-			respuesta = JOptionPane.showInputDialog("1. Añadir\n" + "2. Modificar\n" + "3. Borrar\n" + "4. Listado\n"
+			respuesta = JOptionPane.showInputDialog("1. Añadir\n" + "2. Modificar\n"
+					+ "3. Borrar\n" + "4. Listado\n"
 					+ "5. Buscar por Id\n" + "\n0. Salir");
 			opcion = Integer.parseInt(respuesta);
 			switch (opcion) {
@@ -95,7 +96,18 @@ public class MantenimientoLibros {
 	}
 
 	public static void modificar() {
-		
+		int idAModificar = Integer
+				.parseInt(JOptionPane.showInputDialog("Introduce el ID del libro que quieres modificar"));
+		borrar(idAModificar);
+
+		int idLibro;
+		String tituloNuevoLibro;
+		idLibro = Integer.parseInt(JOptionPane.showInputDialog("Añade el id del libro : "));
+		tituloNuevoLibro = JOptionPane.showInputDialog("Añade el título del libro : ");
+
+		Crudable<Libro> dao = LibrosDAOColeccion.getInstance();
+		Libro nuevoLibro = new Libro(idLibro, tituloNuevoLibro);
+		dao.insertar(nuevoLibro);
 	}
 
 	public static void borrar(int numeroABorrar) {
@@ -115,7 +127,10 @@ public class MantenimientoLibros {
 	}
 
 	public static void buscarPorID() {
-
+		Crudable<Libro> dao = LibrosDAOColeccion.getInstance();
+		
+		dao.obtenerPorId(1);
+		/*
 		String id;
 		Crudable<Libro> dao = LibrosDAOColeccion.getInstance();
 
@@ -127,19 +142,19 @@ public class MantenimientoLibros {
 				for (; i < numeroDeLibros(); i++) {
 					if (id.equalsIgnoreCase(String.valueOf(dao.getId()))) {
 						listado = "ID encontrado - " + dao.getId();
-					}					
+					}
 				}
 			} else {
 				JOptionPane.showMessageDialog(null, "No existe ningún libro con ese id", "Aviso",
 						JOptionPane.WARNING_MESSAGE);
 			}
 			JOptionPane.showMessageDialog(null, listado);
-		}
+		}*/
 	}
 
 	public static int numeroDeLibros() {
 		Crudable<Libro> dao = LibrosDAOColeccion.getInstance();
-		int numerodeLibros = dao.numeroDeLibros();
+		int numerodeLibros = dao.numero();
 		return numerodeLibros;
 	}
 

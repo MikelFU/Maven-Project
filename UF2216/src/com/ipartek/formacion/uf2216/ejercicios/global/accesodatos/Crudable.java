@@ -7,13 +7,12 @@ public interface Crudable<T> {
 	//Delete
 	
 	public Iterable<T> obtenerTodos();
-	public T obtenerPorId();
+	public T obtenerPorId(int id);
 	
 	public void insertar(T objeto);
 	public void modificar(T objeto);
 	public void borrar(T objeto);
 	public void borrar(int id);
-	public int numeroDeLibros();
-	public int getId();
+	public int numero();
 	
 }

@@ -13,8 +13,6 @@ public class LibrosDAOColeccion implements Crudable<Libro> {
 	private LibrosDAOColeccion() {
 	}
 
-	Libro libr = new Libro();
-
 	private static LibrosDAOColeccion instancia; // = new LibrosDAOColeccion();
 
 	public static LibrosDAOColeccion getInstance() {
@@ -34,7 +32,10 @@ public class LibrosDAOColeccion implements Crudable<Libro> {
 	}
 
 	@Override
-	public Libro obtenerPorId() {
+	public Libro obtenerPorId(int id) {
+//		for (int i = 0; i < libros.size() ; i++) {
+////			
+////		}  
 		return null;
 	}
 
@@ -56,19 +57,14 @@ public class LibrosDAOColeccion implements Crudable<Libro> {
 
 	@Override
 	public void borrar(int id) {
-		if (id == getId()) {
+		if (id == 0) { // cambiar el 0 por el metodo para obtenerID
 			libros.remove(id);
 		}
 	}
 
-	public int numeroDeLibros() {
+	public int numero() {
 		int numero = libros.size();
 		return numero;
-	}
-
-	@Override
-	public int getId() {
-		return libr.getId();
 	}
 
 }
