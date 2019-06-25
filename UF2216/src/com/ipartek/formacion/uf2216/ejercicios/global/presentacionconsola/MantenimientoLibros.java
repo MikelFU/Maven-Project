@@ -23,7 +23,6 @@ public class MantenimientoLibros {
 		dao.insertar(libro1);
 		dao.insertar(libro2);
 		dao.insertar(libro3);
-		arrayLibros.add(libro1);
 
 		mostrarMenu();
 
@@ -49,6 +48,7 @@ public class MantenimientoLibros {
 				int numeroABorrar;
 				numeroABorrar = Integer.parseInt(JOptionPane.showInputDialog("Introduzca ID a borrar"));
 				borrar(numeroABorrar);
+				volver();
 				break;
 			case 4:
 				listado();
@@ -84,48 +84,57 @@ public class MantenimientoLibros {
 		String volver;
 		volver = JOptionPane.showInputDialog("Pulsa 1 para ver el listado.\n Presiona 2 para volver al menu.");
 
-		do {
-			if (volver.equalsIgnoreCase("1")) {
-				listado();
-			} else if (volver.equalsIgnoreCase("2")) {
-				mostrarMenu();
-			}
-		} while (volver.equalsIgnoreCase("S"));
+		if (volver.equals("1")) {
+			listado();
+		} else if (volver.equals("2")) {
+			mostrarMenu();
+		} else {
+			JOptionPane.showMessageDialog(null, "El número no es correcto. Vuelves al menú.");
+		}
+
 	}
 
 	public static void modificar() {
-
+		
 	}
 
 	public static void borrar(int numeroABorrar) {
 		Crudable<Libro> dao = LibrosDAOColeccion.getInstance();
 		dao.borrar(numeroABorrar);
-		volver();
+
 	}
 
 	public static void listado() {
 		Crudable<Libro> dao = LibrosDAOColeccion.getInstance();
-//		dao.insertar(new Libro(1, "Título 1"));
-//		dao.insertar(new Libro(2, "Título 2"));
 
+		String listado = "<html><h1>Listado de libros</h1><table border = 1><tr><th>ID</th><th>Título</th></tr>";
 		for (Libro libro : dao.obtenerTodos()) {
-			JOptionPane.showMessageDialog(null, libro.getTitulo() + "\nId: " + libro.getId(), "Listado de libros",
-					JOptionPane.INFORMATION_MESSAGE);
-//			System.out.println(libro);
+			listado += "<tr><td>" + libro.getId() + "</td><td>" + libro.getTitulo() + "</td></tr>";
+			JOptionPane.showMessageDialog(null, listado, "Listado de libros", JOptionPane.PLAIN_MESSAGE);
 		}
 	}
 
 	public static void buscarPorID() {
-		/*
-		 * String id; Crudable<Libro> dao = LibrosDAOColeccion.getInstance();
-		 * 
-		 * do { id = JOptionPane.showInputDialog("Introduzca el ID a buscar"); int i;
-		 * for (i = 0; i < numeroDeLibros() ; i++) {
-		 * 
-		 * } } while (JOptionPane.showConfirmDialog( null, "Desea Continuar",
-		 * "Otro tema", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION);
-		 */
 
+		String id;
+		Crudable<Libro> dao = LibrosDAOColeccion.getInstance();
+
+		id = JOptionPane.showInputDialog("Introduzca el ID a buscar");
+		int i;
+		String listado = "";
+		for (i = 0; i < numeroDeLibros() && id.equalsIgnoreCase(String.valueOf(dao.getId())); i++) {
+			if (i == dao.getId()) {
+				for (; i < numeroDeLibros(); i++) {
+					if (id.equalsIgnoreCase(String.valueOf(dao.getId()))) {
+						listado = "ID encontrado - " + dao.getId();
+					}					
+				}
+			} else {
+				JOptionPane.showMessageDialog(null, "No existe ningún libro con ese id", "Aviso",
+						JOptionPane.WARNING_MESSAGE);
+			}
+			JOptionPane.showMessageDialog(null, listado);
+		}
 	}
 
 	public static int numeroDeLibros() {

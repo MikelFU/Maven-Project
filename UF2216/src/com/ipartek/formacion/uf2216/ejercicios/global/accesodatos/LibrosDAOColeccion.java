@@ -56,7 +56,7 @@ public class LibrosDAOColeccion implements Crudable<Libro> {
 
 	@Override
 	public void borrar(int id) {
-		if (id == getid()) {
+		if (id == getId()) {
 			libros.remove(id);
 		}
 	}
@@ -66,7 +66,8 @@ public class LibrosDAOColeccion implements Crudable<Libro> {
 		return numero;
 	}
 
-	public int getid() {
+	@Override
+	public int getId() {
 		return libr.getId();
 	}
 

@@ -14,5 +14,6 @@ public interface Crudable<T> {
 	public void borrar(T objeto);
 	public void borrar(int id);
 	public int numeroDeLibros();
+	public int getId();
 	
 }
