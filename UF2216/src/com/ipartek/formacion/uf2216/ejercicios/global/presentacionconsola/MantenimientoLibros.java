@@ -32,8 +32,7 @@ public class MantenimientoLibros {
 		String respuesta;
 		int opcion;
 		do {
-			respuesta = JOptionPane.showInputDialog("1. Añadir\n" + "2. Modificar\n"
-					+ "3. Borrar\n" + "4. Listado\n"
+			respuesta = JOptionPane.showInputDialog("1. Añadir\n" + "2. Modificar\n" + "3. Borrar\n" + "4. Listado\n"
 					+ "5. Buscar por Id\n" + "\n0. Salir");
 			opcion = Integer.parseInt(respuesta);
 			switch (opcion) {
@@ -56,7 +55,9 @@ public class MantenimientoLibros {
 				volver();
 				break;
 			case 5:
-				buscarPorID();
+				int id;
+				id = Integer.parseInt(JOptionPane.showInputDialog("Introduzca el Id que desea buscar"));
+				buscarPorID(id);
 				volver();
 				break;
 			case 0:
@@ -112,44 +113,38 @@ public class MantenimientoLibros {
 
 	public static void borrar(int numeroABorrar) {
 		Crudable<Libro> dao = LibrosDAOColeccion.getInstance();
-		dao.borrar(numeroABorrar);
-
+		for (Libro libro : dao.obtenerTodos()) {
+			if (libro.getId() == numeroABorrar) {
+				dao.borrar(numeroABorrar);
+			} else {
+				JOptionPane.showMessageDialog(null, "No existe ese libro");
+			}
+		}
 	}
 
 	public static void listado() {
 		Crudable<Libro> dao = LibrosDAOColeccion.getInstance();
 
-		String listado = "<html><h1>Listado de libros</h1><table border = 1><tr><th>ID</th><th>Título</th></tr>";
+		String listado = "<html><h1>Listado de libros</h1><table border = 1 align = center>"
+				+ "<tr><th>ID</th><th>Título</th></tr>";
 		for (Libro libro : dao.obtenerTodos()) {
 			listado += "<tr><td>" + libro.getId() + "</td><td>" + libro.getTitulo() + "</td></tr>";
 			JOptionPane.showMessageDialog(null, listado, "Listado de libros", JOptionPane.PLAIN_MESSAGE);
 		}
 	}
 
-	public static void buscarPorID() {
-		Crudable<Libro> dao = LibrosDAOColeccion.getInstance();
-		
-		dao.obtenerPorId(1);
-		/*
-		String id;
+	public static void buscarPorID(int id) {
 		Crudable<Libro> dao = LibrosDAOColeccion.getInstance();
 
-		id = JOptionPane.showInputDialog("Introduzca el ID a buscar");
-		int i;
-		String listado = "";
-		for (i = 0; i < numeroDeLibros() && id.equalsIgnoreCase(String.valueOf(dao.getId())); i++) {
-			if (i == dao.getId()) {
-				for (; i < numeroDeLibros(); i++) {
-					if (id.equalsIgnoreCase(String.valueOf(dao.getId()))) {
-						listado = "ID encontrado - " + dao.getId();
-					}
-				}
+		for (Libro libro : dao.obtenerTodos()) {
+			if (libro.getId() == id) {
+				JOptionPane.showMessageDialog(null, "El id " + libro.getId() + " si está en la librería\n"
+						+ "El titulo de ese libro es : " + libro.getTitulo());
 			} else {
-				JOptionPane.showMessageDialog(null, "No existe ningún libro con ese id", "Aviso",
+				JOptionPane.showMessageDialog(null, "El Id indicado no existe en esta librería", "Aviso",
 						JOptionPane.WARNING_MESSAGE);
 			}
-			JOptionPane.showMessageDialog(null, listado);
-		}*/
+		}
 	}
 
 	public static int numeroDeLibros() {

@@ -33,9 +33,6 @@ public class LibrosDAOColeccion implements Crudable<Libro> {
 
 	@Override
 	public Libro obtenerPorId(int id) {
-//		for (int i = 0; i < libros.size() ; i++) {
-////			
-////		}  
 		return null;
 	}
 
@@ -57,9 +54,7 @@ public class LibrosDAOColeccion implements Crudable<Libro> {
 
 	@Override
 	public void borrar(int id) {
-		if (id == 0) { // cambiar el 0 por el metodo para obtenerID
-			libros.remove(id);
-		}
+		libros.remove(id);
 	}
 
 	public int numero() {
